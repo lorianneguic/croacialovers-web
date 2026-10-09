@@ -201,6 +201,18 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .dots { display: flex; justify-content: center; gap: 10px; margin-top: 22px; }
 .dot { width: 10px; height: 10px; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer; transition: width .2s ease, background .2s ease; }
 .dot[aria-selected="true"] { width: 28px; border-radius: 6px; background: var(--red); }
+/* lugar del mes en portada */
+.month { display: grid; grid-template-columns: 1.2fr 1fr; gap: clamp(24px, 4vw, 56px); align-items: center; }
+.month > * { min-width: 0; }
+.month-img { position: relative; display: block; border-radius: 18px; overflow: hidden; }
+.month-img img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .4s ease; }
+.month-img:hover img { transform: scale(1.03); }
+.month-img .tag { position: absolute; left: 16px; top: 16px; background: var(--red); color: #fff; font-family: var(--display); font-weight: 700; font-size: .78rem; letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; }
+.month h2 { font-size: clamp(2.6rem, 6vw, 4.4rem); }
+.month ul { margin: 0 0 24px; padding-left: 1.1rem; display: grid; gap: 6px; }
+.month .credit { font-size: .78rem; color: var(--ink-soft); margin-top: 8px; }
+@media (max-width: 860px) { .month { grid-template-columns: 1fr; } }
+
 @media (max-width: 860px) { .track { grid-auto-columns: calc((100% - 18px) / 1.6); } }
 @media (max-width: 520px) { .track { grid-auto-columns: 86%; } .arrows { display: none; } }
 
@@ -230,6 +242,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
   </a>
   <nav aria-label="Secciones">
     <a href="#videos">Videos</a>
+    <a href="#lugar-del-mes">Lugar del mes</a>
     <a href="#quien">Quién soy</a>
     <a href="#aprende">Qué aprendes</a>
     <a href="#redes">Dónde encontrarme</a>
@@ -314,6 +327,26 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
           </a>
       </div>
       <div class="dots" id="vdots" role="tablist" aria-label="Elegir video"></div>
+    </div>
+  </section>
+
+  <section class="block learn" id="lugar-del-mes">
+    <div class="wrap month">
+      <div>
+        <a class="month-img" href="/split/"><img src="/img/split/riva-aerea.jpg" alt="Vista aérea de Split, Croacia" width="1600" height="1066" loading="lazy"><span class="tag">Octubre 2026</span></a>
+        <p class="credit">Foto: mana5280 / Unsplash</p>
+      </div>
+      <div>
+        <span class="eyebrow">Lugar del mes</span>
+        <h2>Split</h2>
+        <p>Una ciudad que vive dentro de un palacio romano, frente al Adriático. Descubre qué ver y aprende las frases en croata que vas a usar allí.</p>
+        <ul>
+          <li>Palacio de Diocleciano y el Peristilo</li>
+          <li>Campanario de San Duje</li>
+          <li>La Riva y el parque Marjan</li>
+        </ul>
+        <a class="btn primary" href="/split/">Ver qué hacer en Split</a>
+      </div>
     </div>
   </section>
 
