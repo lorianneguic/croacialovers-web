@@ -37,6 +37,9 @@
   .next { position: fixed; right: 14px; bottom: max(16px, env(safe-area-inset-bottom)); background: #ff8a1f; color: #fff; border: 4px solid #fff;
     border-radius: 999px; font: 800 24px/1 'Baloo 2', system-ui, sans-serif; padding: 12px 24px 14px; box-shadow: 0 4px 0 #b85a0c, 0 6px 14px rgba(0,0,0,.25); cursor: pointer; }
   .next.pulse { animation: pulse 1.1s ease-in-out infinite; }
+  .card.fin { max-width: 560px; }
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 14px; }
+  .thumbs img { width: 100%; aspect-ratio: 1; object-fit: contain; background: #fff; border: 2px solid #e8d9c4; border-radius: 12px; }
 </style>
 </head>
 <body>
@@ -51,6 +54,13 @@
 <div class="overlay" id="tap"><div class="card">
   <h2>🔊 Toca para escuchar</h2>
   <button class="btn" id="play">▶ Escuchar</button>
+</div></div>
+
+<div class="overlay" id="fin"><div class="card fin">
+  <h2>¡Bravo! 🎉</h2>
+  <p>Aprendiste las 12 palabras.<br>Ahora vuelve al libro: al final te esperan el <b>laberinto</b>, los <b>juegos</b> y los <b>dibujos para pintar</b> 🖍️</p>
+  <div class="thumbs"><img src="img/m-rubia.jpg" alt=""><img src="img/c-bundeva.jpg" alt=""><img src="img/c-sismis.jpg" alt=""><img src="img/c-pauk.jpg" alt=""></div>
+  <button class="btn" id="finback">← Volver al libro</button>
 </div></div>
 
 <audio id="aud" preload="auto"></audio>
@@ -82,7 +92,7 @@
   show(p);
   $("next").onclick = function () {
     var i = KEYS.indexOf(p);
-    if (i === KEYS.length - 1) { goBack(); return; }
+    if (i === KEYS.length - 1) { a.pause(); $("fin").classList.add("on"); return; }
     show(KEYS[i + 1]); play();
   };
   function goBack() {
@@ -100,6 +110,7 @@
   $("play").onclick = play;
   $("again").onclick = play;
   $("back").onclick = goBack;
+  $("finback").onclick = goBack;
   setTimeout(play, 500);
 </script>
 </body>
