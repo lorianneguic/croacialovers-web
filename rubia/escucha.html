@@ -76,6 +76,8 @@
     $("next").textContent = last ? "¡Terminamos! 🎉" : "Siguiente ➜";
     $("next").classList.remove("pulse");
     try { history.replaceState(null, "", "?p=" + p); } catch (e) {}
+    var nx = KEYS[KEYS.indexOf(p) + 1];
+    if (nx) { (new Image()).src = "img/" + nx + ".jpg"; }
   }
   show(p);
   $("next").onclick = function () {
