@@ -44,7 +44,7 @@
 </head>
 <body>
 <div class="stage"><div class="frame" id="frame">
-  <div class="txt"><div class="big" id="hr"></div><div class="es" id="es"></div><div class="say">se dice: <b id="say"></b></div></div>
+  <div class="txt"><div class="big" id="hr"></div><div class="es" id="es"></div><div class="say"><span id="saylbl">se dice:</span> <b id="say"></b></div></div>
   <div class="logo"></div>
 </div></div>
 <button class="fab back" id="back" aria-label="Volver al libro">←</button>
@@ -52,13 +52,13 @@
 <button class="next" id="next">Siguiente ➜</button>
 
 <div class="overlay" id="tap"><div class="card">
-  <h2>🔊 Toca para escuchar</h2>
+  <h2 id="taph">🔊 Toca para escuchar</h2>
   <button class="btn" id="play">▶ Escuchar</button>
 </div></div>
 
 <div class="overlay" id="fin"><div class="card fin">
-  <h2>¡Bravo! 🎉</h2>
-  <p>Aprendiste las 12 palabras.<br>Ahora abre tu <b>🎁 cuaderno de actividades</b> de regalo: <b>laberinto</b>, <b>juegos</b> y <b>dibujos para pintar</b> 🖍️</p>
+  <h2 id="finh">¡Bravo! 🎉</h2>
+  <p id="finp">Aprendiste las 12 palabras.<br>Ahora abre tu <b>🎁 cuaderno de actividades</b> de regalo: <b>laberinto</b>, <b>juegos</b> y <b>dibujos para pintar</b> 🖍️</p>
   <div class="thumbs"><img src="img/m-rubia.jpg" alt=""><img src="img/c-bundeva.jpg" alt=""><img src="img/c-sismis.jpg" alt=""><img src="img/c-pauk.jpg" alt=""></div>
   <button class="btn" id="finback">← Volver al libro</button>
 </div></div>
@@ -73,6 +73,23 @@
     slatkisi: ["slatkiši", "los dulces", "slat-ki-shi"], kostim: ["kostim", "el disfraz", "kos-tim"],
     metla: ["metla", "la escoba", "met-la"], svijeca: ["svijeća", "la vela", "svi-ie-cha"]
   };
+  var EN = {
+    bundeva: ["pumpkin", "BOON-deh-vah"], vjestica: ["witch", "VYESH-tee-tsah"], duh: ["ghost", "dookh"], sismis: ["bat", "SHEESH-meesh"],
+    pauk: ["spider", "PAH-ook"], paucina: ["spider web", "PAH-oo-chee-nah"], maska: ["mask", "MAHS-kah"], lubanja: ["skull", "LOO-bah-nyah"],
+    slatkisi: ["candy", "SLAHT-kee-shee"], kostim: ["costume", "KOS-teem"], metla: ["broom", "MET-lah"], svijeca: ["candle", "SVEE-yeh-chah"]
+  };
+  var isEN = new URLSearchParams(location.search).get("lang") === "en";
+  var TX = isEN ? { say: "say it:", next: "Next ➜", done: "All done! 🎉", tap: "🔊 Tap to listen", play: "▶ Listen", finh: "Bravo! 🎉",
+      finp: "You learned all 12 words.<br>Now open your <b>🎁 free activity book</b>: <b>maze</b>, <b>games</b> and <b>coloring pages</b> 🖍️", back: "← Back to the book" }
+    : { say: "se dice:", next: "Siguiente ➜", done: "¡Terminamos! 🎉" };
+  if (isEN) {
+    document.documentElement.lang = "en";
+    document.getElementById("saylbl").textContent = TX.say;
+    document.getElementById("taph").textContent = TX.tap; document.getElementById("play").textContent = TX.play;
+    document.getElementById("finh").textContent = TX.finh; document.getElementById("finp").innerHTML = TX.finp;
+    document.getElementById("finback").textContent = TX.back; document.getElementById("back").setAttribute("aria-label", "Back to the book");
+    Object.keys(EN).forEach(function (k) { W[k] = [W[k][0], EN[k][0], EN[k][1]]; });
+  }
   var KEYS = Object.keys(W), $ = function (id) { return document.getElementById(id); }, a = $("aud");
   var p = new URLSearchParams(location.search).get("p") || "bundeva";
   if (!W[p]) p = "bundeva";
@@ -83,9 +100,9 @@
     document.title = w[0] + " – " + w[1] + " · Rubia";
     a.src = "../audio/rubia/noc-vjestica/" + p + ".mp3";
     var last = KEYS.indexOf(p) === KEYS.length - 1;
-    $("next").textContent = last ? "¡Terminamos! 🎉" : "Siguiente ➜";
+    $("next").textContent = last ? TX.done : TX.next;
     $("next").classList.remove("pulse");
-    try { history.replaceState(null, "", "?p=" + p); } catch (e) {}
+    try { history.replaceState(null, "", "?p=" + p + (isEN ? "&lang=en" : "")); } catch (e) {}
     var nx = KEYS[KEYS.indexOf(p) + 1];
     if (nx) { (new Image()).src = "img/" + nx + ".jpg"; }
   }
