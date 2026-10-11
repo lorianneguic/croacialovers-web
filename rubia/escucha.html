@@ -64,46 +64,66 @@
 
 <audio id="aud" preload="auto"></audio>
 <script>
-  var W = {
-    bundeva: ["bundeva", "la calabaza", "bun-de-va"], vjestica: ["vještica", "la bruja", "vies-ti-tsa"],
-    duh: ["duh", "el fantasma", "duj"], sismis: ["šišmiš", "el murciélago", "shish-mish"],
-    pauk: ["pauk", "la araña", "pa-uk"], paucina: ["paučina", "la telaraña", "pa-u-chi-na"],
-    maska: ["maska", "la máscara", "mas-ka"], lubanja: ["lubanja", "la calavera", "lu-ba-ña"],
-    slatkisi: ["slatkiši", "los dulces", "slat-ki-shi"], kostim: ["kostim", "el disfraz", "kos-tim"],
-    metla: ["metla", "la escoba", "met-la"], svijeca: ["svijeća", "la vela", "svi-ie-cha"]
+  var BOOKS = {
+    "noc-vjestica": { img: "img/", aud: "../audio/rubia/noc-vjestica/",
+      thumbs: ["img/m-rubia.jpg", "img/c-bundeva.jpg", "img/c-sismis.jpg", "img/c-pauk.jpg"],
+      es: { finp: "Aprendiste las 12 palabras.<br>Ahora abre tu <b>🎁 cuaderno de actividades</b> de regalo: <b>laberinto</b>, <b>juegos</b> y <b>dibujos para pintar</b> 🖍️" },
+      en: { finp: "You learned all 12 words.<br>Now open your <b>🎁 free activity book</b>: <b>maze</b>, <b>games</b> and <b>coloring pages</b> 🖍️" },
+      W: {
+        bundeva: ["bundeva", "la calabaza", "bun-de-va", "pumpkin", "BOON-deh-vah"], vjestica: ["vještica", "la bruja", "vies-ti-tsa", "witch", "VYESH-tee-tsah"],
+        duh: ["duh", "el fantasma", "duj", "ghost", "dookh"], sismis: ["šišmiš", "el murciélago", "shish-mish", "bat", "SHEESH-meesh"],
+        pauk: ["pauk", "la araña", "pa-uk", "spider", "PAH-ook"], paucina: ["paučina", "la telaraña", "pa-u-chi-na", "spider web", "PAH-oo-chee-nah"],
+        maska: ["maska", "la máscara", "mas-ka", "mask", "MAHS-kah"], lubanja: ["lubanja", "la calavera", "lu-ba-ña", "skull", "LOO-bah-nyah"],
+        slatkisi: ["slatkiši", "los dulces", "slat-ki-shi", "candy", "SLAHT-kee-shee"], kostim: ["kostim", "el disfraz", "kos-tim", "costume", "KOS-teem"],
+        metla: ["metla", "la escoba", "met-la", "broom", "MET-lah"], svijeca: ["svijeća", "la vela", "svi-ie-cha", "candle", "SVEE-yeh-chah"]
+      } },
+    "zivotinje": { img: "img/zivotinje/", aud: "../audio/rubia/zivotinje/",
+      thumbs: ["img/zivotinje/macka.jpg", "img/zivotinje/zeko.jpg", "img/zivotinje/dupin.jpg", "img/zivotinje/pingvin.jpg"],
+      es: { finp: "¡Aprendiste las 12 palabras de los animales!<br>Ahora abre tu <b>🎁 cuaderno de actividades</b> de regalo y sigue jugando con Rubia 🖍️" },
+      en: { finp: "You learned all 12 animal words!<br>Now open your <b>🎁 free activity book</b> and keep playing with Rubia 🖍️" },
+      W: {
+        macka: ["mačka", "la gata", "mach-ka", "cat", "MAHCH-kah"], pas: ["pas", "el perro", "pas", "dog", "pahs"],
+        krava: ["krava", "la vaca", "kra-va", "cow", "KRAH-vah"], dupin: ["dupin", "el delfín", "du-pin", "dolphin", "DOO-peen"],
+        medvjed: ["medvjed", "el oso", "med-vied", "bear", "MED-vyed"], prasic: ["prasić", "el chanchito", "pra-sich", "piglet", "PRAH-seech"],
+        kokos: ["kokoš", "la gallina", "ko-kosh", "hen", "KOH-kosh"], zeko: ["zeko", "el conejito", "ze-ko", "bunny", "ZEH-koh"],
+        riba: ["riba", "el pez", "ri-ba", "fish", "REE-bah"], konj: ["konj", "el caballo", "koñ", "horse", "kohny"],
+        ptica: ["ptica", "el pájaro", "pti-tsa", "bird", "PTEE-tsah"], pingvin: ["pingvin", "el pingüino", "ping-vin", "penguin", "PEENG-veen"]
+      } }
   };
-  var EN = {
-    bundeva: ["pumpkin", "BOON-deh-vah"], vjestica: ["witch", "VYESH-tee-tsah"], duh: ["ghost", "dookh"], sismis: ["bat", "SHEESH-meesh"],
-    pauk: ["spider", "PAH-ook"], paucina: ["spider web", "PAH-oo-chee-nah"], maska: ["mask", "MAHS-kah"], lubanja: ["skull", "LOO-bah-nyah"],
-    slatkisi: ["candy", "SLAHT-kee-shee"], kostim: ["costume", "KOS-teem"], metla: ["broom", "MET-lah"], svijeca: ["candle", "SVEE-yeh-chah"]
-  };
-  var isEN = new URLSearchParams(location.search).get("lang") === "en";
+  var Q = new URLSearchParams(location.search);
+  var bookId = BOOKS[Q.get("b")] ? Q.get("b") : "noc-vjestica";
+  var B = BOOKS[bookId];
+  var isEN = Q.get("lang") === "en";
+  var W = {};
+  Object.keys(B.W).forEach(function (k) { var x = B.W[k]; W[k] = isEN ? [x[0], x[3], x[4]] : [x[0], x[1], x[2]]; });
   var TX = isEN ? { say: "say it:", next: "Next ➜", done: "All done! 🎉", tap: "🔊 Tap to listen", play: "▶ Listen", finh: "Bravo! 🎉",
-      finp: "You learned all 12 words.<br>Now open your <b>🎁 free activity book</b>: <b>maze</b>, <b>games</b> and <b>coloring pages</b> 🖍️", back: "🔁 Listen again" }
-    : { say: "se dice:", next: "Siguiente ➜", done: "¡Terminamos! 🎉" };
+      finp: B.en.finp, back: "🔁 Listen again" }
+    : { say: "se dice:", next: "Siguiente ➜", done: "¡Terminamos! 🎉", finp: B.es.finp };
+  document.getElementById("finp").innerHTML = TX.finp;
+  var th = document.querySelectorAll(".thumbs img");
+  for (var t = 0; t < th.length; t++) th[t].src = B.thumbs[t];
   if (isEN) {
     document.documentElement.lang = "en";
     document.getElementById("saylbl").textContent = TX.say;
     document.getElementById("taph").textContent = TX.tap; document.getElementById("play").textContent = TX.play;
-    document.getElementById("finh").textContent = TX.finh; document.getElementById("finp").innerHTML = TX.finp;
+    document.getElementById("finh").textContent = TX.finh;
     document.getElementById("restart").textContent = TX.back;
-    Object.keys(EN).forEach(function (k) { W[k] = [W[k][0], EN[k][0], EN[k][1]]; });
   }
   var KEYS = Object.keys(W), $ = function (id) { return document.getElementById(id); }, a = $("aud");
-  var p = new URLSearchParams(location.search).get("p") || "bundeva";
-  if (!W[p]) p = "bundeva";
+  var p = Q.get("p") || KEYS[0];
+  if (!W[p]) p = KEYS[0];
   function show(k) {
     p = k; var w = W[p];
-    $("frame").style.backgroundImage = "url('img/" + p + ".jpg')";
+    $("frame").style.backgroundImage = "url('" + B.img + p + ".jpg')";
     $("hr").textContent = w[0]; $("es").textContent = w[1]; $("say").textContent = w[2];
     document.title = w[0] + " – " + w[1] + " · Rubia";
-    a.src = "../audio/rubia/noc-vjestica/" + p + ".mp3";
+    a.src = B.aud + p + ".mp3";
     var last = KEYS.indexOf(p) === KEYS.length - 1;
     $("next").textContent = last ? TX.done : TX.next;
     $("next").classList.remove("pulse");
-    try { history.replaceState(null, "", "?p=" + p + (isEN ? "&lang=en" : "")); } catch (e) {}
+    try { history.replaceState(null, "", "?" + (bookId !== "noc-vjestica" ? "b=" + bookId + "&" : "") + "p=" + p + (isEN ? "&lang=en" : "")); } catch (e) {}
     var nx = KEYS[KEYS.indexOf(p) + 1];
-    if (nx) { (new Image()).src = "img/" + nx + ".jpg"; }
+    if (nx) { (new Image()).src = B.img + nx + ".jpg"; }
   }
   show(p);
   $("next").onclick = function () {
