@@ -47,7 +47,6 @@
   <div class="txt"><div class="big" id="hr"></div><div class="es" id="es"></div><div class="say"><span id="saylbl">se dice:</span> <b id="say"></b></div></div>
   <div class="logo"></div>
 </div></div>
-<button class="fab back" id="back" aria-label="Volver al libro">←</button>
 <button class="fab again" id="again" aria-label="Escuchar otra vez">🔊</button>
 <button class="next" id="next">Siguiente ➜</button>
 
@@ -60,7 +59,7 @@
   <h2 id="finh">¡Bravo! 🎉</h2>
   <p id="finp">Aprendiste las 12 palabras.<br>Ahora abre tu <b>🎁 cuaderno de actividades</b> de regalo: <b>laberinto</b>, <b>juegos</b> y <b>dibujos para pintar</b> 🖍️</p>
   <div class="thumbs"><img src="img/m-rubia.jpg" alt=""><img src="img/c-bundeva.jpg" alt=""><img src="img/c-sismis.jpg" alt=""><img src="img/c-pauk.jpg" alt=""></div>
-  <button class="btn" id="finback">← Volver al libro</button>
+  <button class="btn" id="restart">🔁 Escuchar otra vez</button>
 </div></div>
 
 <audio id="aud" preload="auto"></audio>
@@ -80,14 +79,14 @@
   };
   var isEN = new URLSearchParams(location.search).get("lang") === "en";
   var TX = isEN ? { say: "say it:", next: "Next ➜", done: "All done! 🎉", tap: "🔊 Tap to listen", play: "▶ Listen", finh: "Bravo! 🎉",
-      finp: "You learned all 12 words.<br>Now open your <b>🎁 free activity book</b>: <b>maze</b>, <b>games</b> and <b>coloring pages</b> 🖍️", back: "← Back to the book" }
+      finp: "You learned all 12 words.<br>Now open your <b>🎁 free activity book</b>: <b>maze</b>, <b>games</b> and <b>coloring pages</b> 🖍️", back: "🔁 Listen again" }
     : { say: "se dice:", next: "Siguiente ➜", done: "¡Terminamos! 🎉" };
   if (isEN) {
     document.documentElement.lang = "en";
     document.getElementById("saylbl").textContent = TX.say;
     document.getElementById("taph").textContent = TX.tap; document.getElementById("play").textContent = TX.play;
     document.getElementById("finh").textContent = TX.finh; document.getElementById("finp").innerHTML = TX.finp;
-    document.getElementById("finback").textContent = TX.back; document.getElementById("back").setAttribute("aria-label", "Back to the book");
+    document.getElementById("restart").textContent = TX.back;
     Object.keys(EN).forEach(function (k) { W[k] = [W[k][0], EN[k][0], EN[k][1]]; });
   }
   var KEYS = Object.keys(W), $ = function (id) { return document.getElementById(id); }, a = $("aud");
@@ -112,13 +111,8 @@
     if (i === KEYS.length - 1) { a.pause(); $("fin").classList.add("on"); return; }
     show(KEYS[i + 1]); play();
   };
-  function goBack() {
-    // Volver al libro: atrás si hay historial; si no, intentar cerrar la pestaña
-    if (history.length > 1) { history.back(); }
-    else { try { window.close(); } catch (e) {} }
-  }
   function play() {
-    $("tap").classList.remove("on"); $("back").classList.remove("pulse");
+    $("tap").classList.remove("on");
     a.currentTime = 0;
     var pr = a.play();
     if (pr && pr.catch) pr.catch(function () { $("tap").classList.add("on"); });
@@ -126,8 +120,7 @@
   a.addEventListener("ended", function () { $("next").classList.add("pulse"); });
   $("play").onclick = play;
   $("again").onclick = play;
-  $("back").onclick = goBack;
-  $("finback").onclick = goBack;
+  $("restart").onclick = function () { $("fin").classList.remove("on"); show(KEYS[0]); play(); };
   setTimeout(play, 500);
 </script>
 </body>
