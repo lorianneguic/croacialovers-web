@@ -203,6 +203,9 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .vcard { scroll-snap-align: start; display: grid; gap: 12px; align-content: start; text-decoration: none; color: var(--ink); min-width: 0; }
 .thumb { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: repeating-conic-gradient(var(--red) 0 25%, #ffffff 0 50%) 0 0 / 28px 28px; }
 .thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.vcard.ebook .thumb { background: #fff3c4; }
+.vcard.ebook .badge { justify-self: start; background: #ff8a1f; color: #fff; font-weight: 700; font-size: .8rem; padding: 4px 12px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.2); }
+.vcard.ebook .vlink { color: var(--red); }
 .dur { position: absolute; right: 8px; bottom: 8px; background: rgba(0,0,0,.78); color: #ffffff; font-size: .78rem; font-weight: 600; padding: 2px 7px; border-radius: 6px; font-variant-numeric: tabular-nums; }
 .play { position: absolute; left: 50%; top: 50%; width: 54px; height: 54px; margin: -27px 0 0 -27px; border-radius: 50%; background: var(--red); color: #ffffff; display: grid; place-items: center; box-shadow: 0 6px 20px rgba(0,0,0,.25); transition: transform .15s ease; }
 .play svg { width: 24px; height: 24px; margin-left: 3px; }
@@ -340,8 +343,8 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     <div class="wrap">
       <div class="vhead">
         <div>
-          <span class="eyebrow">Últimos videos</span>
-          <h2>Aprende con mis clases más nuevas.</h2>
+          <span class="eyebrow">Lo nuevo</span>
+          <h2>Mis libros y clases más nuevas.</h2>
         </div>
         <div class="arrows">
           <button type="button" class="arrow" id="vprev" aria-label="Video anterior">‹</button>
@@ -349,6 +352,18 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
         </div>
       </div>
       <div class="track" id="vtrack" tabindex="0">
+          <a class="vcard ebook" href="https://payhip.com/b/mQasW" target="_blank" rel="noopener">
+            <span class="thumb"><img src="rubia/payhip/1-portada.jpg" alt="Ebook Rubia Halloween, croata para niños" loading="lazy"></span>
+            <span class="badge">📘 Ebook nuevo · <span class="p-now">$5</span></span>
+            <span class="vtitle">Croata para niños con Rubia: Halloween 🎃 (en español)</span>
+            <span class="vlink">Comprar en Payhip →</span>
+          </a>
+          <a class="vcard ebook" href="https://payhip.com/b/qMg4D" target="_blank" rel="noopener">
+            <span class="thumb"><img src="rubia/payhip-en/1-cover.jpg" alt="Rubia Halloween ebook, Croatian for kids in English" loading="lazy"></span>
+            <span class="badge">📘 New ebook · <span class="p-now">$5</span></span>
+            <span class="vtitle">Croatian for kids with Rubia: Halloween 🎃 (in English)</span>
+            <span class="vlink">Buy on Payhip →</span>
+          </a>
           <a class="vcard" href="https://www.youtube.com/watch?v=nHap0MQhJt8" target="_blank" rel="noopener">
             <span class="thumb"><img src="https://i.ytimg.com/vi/nHap0MQhJt8/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="dur">6:36</span><span class="play" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></span>
             <span class="vtitle">¿Sabes el opuesto? 48 palabras en croata | Desafío Espejo</span>
