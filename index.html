@@ -224,6 +224,21 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 .month .credit { font-size: .78rem; color: var(--ink-soft); margin-top: 8px; }
 @media (max-width: 860px) { .month { grid-template-columns: 1fr; } }
 
+/* libros */
+.books { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 34px; }
+.book { display: grid; gap: 14px; align-content: start; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 16px 16px 22px; min-width: 0; }
+.book img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
+.book h3 { font-size: 1.35rem; font-weight: 800; }
+.book p { margin: 0; color: var(--ink-soft); font-size: 1rem; }
+.book .lang { display: inline-block; justify-self: start; background: var(--chip); color: var(--red); font-weight: 700; font-size: .8rem; padding: 4px 12px; border-radius: 999px; }
+.price { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; font-family: var(--display); }
+.price b { font-size: 2rem; font-weight: 800; color: var(--red); }
+.price s { color: var(--ink-soft); font-size: 1.1rem; }
+.price small { font-family: var(--body); font-size: .9rem; color: var(--ink); background: #fff3c4; padding: 2px 10px; border-radius: 999px; }
+.book .btn { justify-self: start; }
+.books-note { margin-top: 20px; font-size: .95rem; color: var(--ink-soft); }
+@media (max-width: 760px) { .books { grid-template-columns: 1fr; } }
+
 @media (max-width: 860px) { .track { grid-auto-columns: calc((100% - 18px) / 1.6); } }
 @media (max-width: 520px) { .track { grid-auto-columns: 86%; } .arrows { display: none; } }
 
@@ -252,6 +267,7 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
     Croacia Lovers
   </a>
   <nav aria-label="Secciones">
+    <a href="#libros">Libros</a>
     <a href="#videos">Videos</a>
     <a href="#lugar-del-mes">Lugar del mes</a>
     <a href="#quien">Quién soy</a>
@@ -292,6 +308,33 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
       <span>Vidimo se! · Nos vemos</span>
     </div>
   </div>
+
+  <section class="block learn" id="libros">
+    <div class="wrap">
+      <span class="eyebrow">Libros para niños</span>
+      <h2>Croata para niños con Rubia 🎃</h2>
+      <p style="max-width:40rem;margin:0">Ebook de Halloween con 12 palabras en croata, ilustraciones tiernas y audio para escuchar la pronunciación en cada página. Para niños de 6 a 8 años. Incluye de regalo un cuaderno de actividades para imprimir.</p>
+      <div class="books">
+        <div class="book">
+          <img src="rubia/payhip/1-portada.jpg" alt="Portada del ebook Rubia Halloween, croata para niños en español" width="1600" height="901" loading="lazy">
+          <span class="lang">🇪🇸 En español</span>
+          <h3>Rubia · Noć vještica</h3>
+          <p>Aprende croata en Halloween. Para niños que hablan español.</p>
+          <div class="price"><b class="p-now">$5</b><s class="p-old">$7</s><small class="p-note">Lanzamiento hasta el 17 de octubre</small></div>
+          <a class="btn primary" href="https://payhip.com/b/mQasW" target="_blank" rel="noopener">Comprar en Payhip</a>
+        </div>
+        <div class="book">
+          <img src="rubia/payhip-en/1-cover.jpg" alt="Cover of the Rubia Halloween ebook, Croatian for kids in English" width="1600" height="901" loading="lazy">
+          <span class="lang">🇬🇧 In English</span>
+          <h3>Rubia · Halloween</h3>
+          <p>Croatian for kids who speak English.</p>
+          <div class="price"><b class="p-now">$5</b><s class="p-old">$7</s><small class="p-note">Launch price until October 17</small></div>
+          <a class="btn primary" href="https://payhip.com/b/qMg4D" target="_blank" rel="noopener">Buy on Payhip</a>
+        </div>
+      </div>
+      <p class="books-note">Pago seguro en Payhip. Recibes el libro al instante en tu correo.</p>
+    </div>
+  </section>
 
   <section class="block videos" id="videos" aria-roledescription="carrusel" aria-label="Últimos videos">
     <div class="wrap">
@@ -449,6 +492,12 @@ footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; g
 
 
 <script>
+// Después del 17 de octubre (hora Chile) se muestra solo el precio normal $7
+(function () {
+  if (Date.now() < Date.parse('2026-10-18T00:00:00-03:00')) return;
+  document.querySelectorAll('.p-now').forEach(function (e) { e.textContent = '$7'; });
+  document.querySelectorAll('.p-old, .p-note').forEach(function (e) { e.remove(); });
+})();
 (function () {
   var track = document.getElementById('vtrack');
   var dotsBox = document.getElementById('vdots');
