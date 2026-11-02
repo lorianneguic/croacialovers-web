@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Abecedario croata · Audio del ebook</title>
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#13306b;--red:#ef4f63;--sky:#4bb3e6;--muted:#5a6b8c;--cream:#fff6d8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Nunito,system-ui,sans-serif;color:var(--navy);background:#f3faff}
+.wrap{max-width:860px;margin:0 auto;padding:12px 16px 40px}
+.head{width:100%;border-radius:18px;display:block}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:14px 0}
+.bar p{font-weight:600;color:var(--muted);font-size:15px;flex:1 1 260px}
+.all{font:800 17px 'Baloo 2',system-ui;background:var(--red);color:#fff;border:3px solid #fff;border-radius:999px;padding:8px 22px;box-shadow:0 4px 0 #b8344a;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.card{background:#fff;border:0;border-radius:16px;overflow:hidden;cursor:pointer;text-align:left;box-shadow:0 2px 6px rgba(19,48,107,.15);transition:transform .15s;font:inherit;color:inherit}
+.card img{width:100%;display:block;aspect-ratio:1}
+.card .tip{padding:6px 10px 10px;font-size:13px;font-weight:600;color:var(--muted);line-height:1.3}
+.card .tip b{color:var(--navy);font-family:'Baloo 2';font-size:16px}
+.card.on{transform:scale(1.04);box-shadow:0 0 0 4px var(--red),0 6px 14px rgba(19,48,107,.25)}
+.foot{text-align:center;margin-top:28px;font-weight:800;font-size:13px;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<img class="head" src="img/abecedario/cabecera.jpg" alt="Abecedario croata">
+<div class="bar"><p>🎧 Toca cada tarjeta: escucharás la letra y luego la palabra. ¡Escucha y repite!</p>
+<button class="all" id="all">▶ Escuchar todo</button></div>
+<div class="grid" id="g"></div>
+<div class="foot">@CROACIA_LOVERS · Aprende Croata fácil</div>
+</div>
+<script>
+const D=[{"n": "001", "l": "A", "p": "avion", "s": "avión", "t": "igual que en español"}, {"n": "002", "l": "B", "p": "brod", "s": "barco", "t": "igual que en español"}, {"n": "003", "l": "C", "p": "cipele", "s": "zapatos", "t": "suena \"ts\": tsipele"}, {"n": "004", "l": "Č", "p": "čaj", "s": "té", "t": "ch fuerte, como en \"chao\""}, {"n": "005", "l": "Ć", "p": "ćup", "s": "jarrón", "t": "ch suave, con la lengua adelante"}, {"n": "006", "l": "D", "p": "dvorac", "s": "castillo", "t": "la C final suena \"ts\": dvorats"}, {"n": "007", "l": "DŽ", "p": "džep", "s": "bolsillo", "t": "como \"gi\" del italiano \"giorno\", fuerte"}, {"n": "008", "l": "Đ", "p": "đumbir", "s": "jengibre", "t": "versión suave de dž"}, {"n": "009", "l": "E", "p": "Europa", "s": "Europa", "t": "se pronuncia cada vocal: e-u-ro-pa"}, {"n": "010", "l": "F", "p": "frizer", "s": "peluquero", "t": "igual que en español"}, {"n": "011", "l": "G", "p": "gitara", "s": "guitarra", "t": "siempre \"gue / gui\", nunca \"je\""}, {"n": "012", "l": "H", "p": "hotel", "s": "hotel", "t": "la H sí suena: jotel"}, {"n": "013", "l": "I", "p": "izlaz", "s": "salida", "t": "la Z zumba como abeja"}, {"n": "014", "l": "J", "p": "jabuka", "s": "manzana", "t": "la J suena \"y\": yabuka"}, {"n": "015", "l": "K", "p": "kuća", "s": "casa", "t": "kucha, con ć suave"}, {"n": "016", "l": "L", "p": "luka", "s": "puerto", "t": "igual que en español"}, {"n": "017", "l": "LJ", "p": "ljubav", "s": "amor", "t": "como \"li\" rápido: liubav"}, {"n": "018", "l": "M", "p": "more", "s": "mar", "t": "dos sílabas: mo-re"}, {"n": "019", "l": "N", "p": "novac", "s": "dinero", "t": "la C final suena \"ts\": novats"}, {"n": "020", "l": "NJ", "p": "njoki", "s": "ñoquis", "t": "¡es nuestra Ñ!"}, {"n": "021", "l": "O", "p": "otok", "s": "isla", "t": "igual que en español"}, {"n": "022", "l": "P", "p": "prozor", "s": "ventana", "t": "igual que en español"}, {"n": "023", "l": "R", "p": "riba", "s": "pez", "t": "R vibrante"}, {"n": "024", "l": "S", "p": "sat", "s": "reloj", "t": "siempre S, nunca Z"}, {"n": "025", "l": "Š", "p": "šešir", "s": "sombrero", "t": "sh de silencio: sheshir"}, {"n": "026", "l": "T", "p": "torba", "s": "bolso / cartera", "t": "igual que en español"}, {"n": "027", "l": "U", "p": "ulica", "s": "calle", "t": "la C suena \"ts\": ulitsa"}, {"n": "028", "l": "V", "p": "vino", "s": "vino", "t": "labio de abajo con los dientes de arriba"}, {"n": "029", "l": "Z", "p": "zec", "s": "liebre", "t": "Z zumbadora y la C suena \"ts\": zets"}, {"n": "030", "l": "Ž", "p": "žirafa", "s": "jirafa", "t": "como la J francesa de \"jour\""}];
+const g=document.getElementById('g'),a=new Audio();let stop=true;
+function play(src){return new Promise(r=>{a.src=src;a.onended=r;a.onerror=r;a.play().catch(r)})}
+async function say(i){document.querySelectorAll('.card').forEach(c=>c.classList.remove('on'));const c=g.children[i];c.classList.add('on');
+ await play('audio/abecedario/letra_'+D[i].n+'.mp3');await new Promise(r=>setTimeout(r,350));await play('audio/abecedario/palabra_'+D[i].n+'.mp3');c.classList.remove('on')}
+D.forEach((d,i)=>{const b=document.createElement('button');b.className='card';
+ b.innerHTML='<img loading="lazy" src="img/abecedario/'+d.n+'.jpg" alt="'+d.l+' – '+d.p+'"><div class="tip"><b>'+d.l+'</b> · '+d.t+'</div>';
+ b.onclick=()=>{stop=true;say(i)};g.appendChild(b)});
+document.getElementById('all').onclick=async e=>{if(!stop){stop=true;a.pause();e.target.textContent='▶ Escuchar todo';return}
+ stop=false;e.target.textContent='■ Detener';for(let i=0;i<D.length&&!stop;i++){g.children[i].scrollIntoView({block:'center',behavior:'smooth'});await say(i);await new Promise(r=>setTimeout(r,500))}
+ stop=true;e.target.textContent='▶ Escuchar todo'};
+</script>
+</body>
+</html>
